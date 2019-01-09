@@ -1,0 +1,12 @@
+<% if @question %>
+  <h1><%= @question.title %></h1>
+  <p><%= @question.description %></p>
+  <br></br>
+  <h2>Submit a response:</h2>
+  <%= form_for [@question, @response], url: {action: "responses/create"} do |f|%>
+    <%= f.label :body, "Response" %>
+    <%= f.text_field :body %>
+
+    <%= f.submit "Submit"%>
+  <% end %>
+<% end %>
