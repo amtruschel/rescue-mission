@@ -9,21 +9,20 @@ class ResponsesController < ApplicationController
   end
 
   def create
-    @question = Question.find(params[:id])
-    @response = Response.new(response_params)
+    @question = Question.find(params[:question_id])
+    @response = Response.new(response_params.merge({user_id: 1, question: @question}))
 
     if @response.save
       flash[:notice] = 'Response saved successfully'
-      redirect_to @response
     else
-      render :new
+      flash[:errors] = @response.errors.full_messages
     end
-    redirect_to @response
+    redirect_to question_path(@question)
   end
 
 private
 
   def response_params
-    params.require(:response).permit(:body, :user_id)
+    params.require(:response).permit(:body, :user_id, :question_id)
   end
 end

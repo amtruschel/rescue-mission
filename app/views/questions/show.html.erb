@@ -3,10 +3,17 @@
   <p><%= @question.description %></p>
   <br></br>
   <h2>Submit a response:</h2>
-  <%= form_for [@question, @response], url: {action: "responses/create"} do |f|%>
+  <%= form_with model: [@question, @response] do |f|%>
     <%= f.label :body, "Response" %>
     <%= f.text_field :body %>
-
-    <%= f.submit "Submit"%>
+    <%= f.submit "Create"%>
+  <% end %>
+  <br/>
+  <% if @responses %>
+    <% @responses.each do |response| %>
+      <ul>
+        <li><%= response.body %></li>
+      </ul>
+    <% end %>
   <% end %>
 <% end %>
