@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>RescueMission</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,11 +11,17 @@
   </head>
 
   <body>
-    <% flash.each do |name, msg| %>
-      <ul>
-        <li><%= msg %></li>
-      <ul>
-    <% end %>
-    <%= yield %>
+    <%= render "layouts/navbar" %>
+    <div id="body" class="container-fluid ml-0">
+      <% flash.each do |key, value| %>
+        <div class="flash <%= key %>">
+          <%= value %><a href="#" class="close" data-dismiss="alert">×</a>
+        </div>
+
+      <% end %>
+      <div class="container">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

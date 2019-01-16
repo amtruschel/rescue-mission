@@ -1,0 +1,33 @@
+#body {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.flash.notice {
+  background-color: #ffdd99;
+  border: 1px solid #ffaa00;
+}
+
+#nav-logo {
+  margin-right: 80px;
+}
+
+#nav-search-bar {
+  margin-right: 80px;
+  margin-left: 40px;
+}
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+
+  > .col,
+  > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}

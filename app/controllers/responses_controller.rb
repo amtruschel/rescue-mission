@@ -15,7 +15,7 @@ class ResponsesController < ApplicationController
     if @response.save
       flash[:notice] = 'Response saved successfully'
     else
-      flash[:errors] = @response.errors.full_messages
+      flash[:notice] = @response.errors.full_messages.join(', ').gsub('Body','Response')
     end
     redirect_to question_path(@question)
   end
