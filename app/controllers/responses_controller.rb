@@ -1,15 +1,15 @@
 class ResponsesController < ApplicationController
+  before_action :find_question, only: [:new,:create,:vote_for_answer]
+
   def show
     @response = Response.find(params[:response_id])
   end
 
   def new
-    @question = Question.find(params[:question_id])
     @response = Response.new
   end
 
   def create
-    @question = Question.find(params[:question_id])
     @response = Response.new(response_params.merge({user_id: 1, question: @question}))
 
     if @response.save
@@ -26,12 +26,30 @@ class ResponsesController < ApplicationController
 
   def vote_for_answer
     @response = Response.find(params[:id])
+
+    if @response.ranking.nil?
+      @response.ranking = 1
+    else
+      @response.ranking += 1
+    end
+
+    if @response.save
+      flash[:success] = "Thanks for voting!"
+      redirect_to @question
+    else
+      flash[:notice] = "Something went wrong :("
+      redirect_to @question
+    end
   end
 
 private
 
   def response_params
     params.require(:response).permit(:body, :user_id, :question_id)
+  end
+
+  def find_question
+    @question = Question.find(params[:question_id])
   end
 
   def current_user

@@ -39,7 +39,14 @@
             <ul id="responses-ul">
               <li class="response-li-group">
                 <p class="response-p"><%= sanitize(@markdown.render(response.body)) %></p>
-                <%= button_to "Vote for Response", { action: "edit" }, class: "btn btn-primary btn-sm", method: "get" %>
+                <div class="row justify-content-start">
+                  <div class="col-sm-8">
+                    <%= image_tag "up-arrow.jpg", :size => "30x30", :class => "up-arrow ml-3" %>
+                    <p class="response-ranking mb-0"><%= "Votes: #{response.ranking || 0}" %></p>
+                    <%= image_tag "down-arrow.jpg", :size => "30x30", :class => "down-arrow ml-3" %>
+                    <%= button_to "Vote for Answer", vote_for_answer_question_response_path(@question, response), class: "btn btn-primary btn-sm", method: "post" %>
+                  </div>
+                </div>
               </li>
             </ul>
           <% end %>
