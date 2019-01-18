@@ -1,3 +1,4 @@
+<br/>
 <h1>Top Questions</h1>
 
 <% if @recent_questions %>
@@ -10,3 +11,5 @@
   <% end %>
   </div>
 <% end %>
+<br/>
+<%= button_to "Ask a Question", { action: "new" }, class: "btn btn-success", method: "get" %>

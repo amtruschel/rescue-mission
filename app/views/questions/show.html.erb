@@ -1,34 +1,52 @@
 <br/>
 <div class="row">
   <div class="col-sm-12">
-<% if @question %>
-  <h3><%= @question.title %></h3>
-  <p><%= @question.description %></p>
-  <br></br>
-  <%= form_with model: [@question, @response] do |f|%>
-  <div class="form-group">
-    <div class="control-label col-sm-2">
-      <%= f.label :body,'Submit Response' %>
+  <% if @question %>
+    <h3><%= @question.title %></h3>
+    <p><%= sanitize(@markdown.render(@question.description)) %></p>
+    <div class="row">
+      <div class="col-sm-4 d-flex">
+        <%= button_to "Edit Question", { action: "edit" }, class: "btn btn-secondary", method: "get" %>
+        <%= button_to "Delete Question", { action: "destroy" }, class: "btn btn-danger del-btn", method: "delete", data: { confirm: "Are you sure you want to delete this question?" } %>
+      </div>
+      <div class="col-sm-8"></div>
     </div>
-    <div class="control-label col-sm-8">
-      <%= f.text_area :body, class: "form-control"%>
+    <br></br>
+    <div class="row">
+      <div class="col-sm-8">
+        <%= form_with model: [@question, @response] do |f|%>
+          <div class="form-group">
+            <div class="control-label">
+              <%= f.label :body,'Submit Response' %>
+              <%= f.text_area :body, class: "form-control"%>
+            </div>
+          </div>
+          <br/>
+          <div class="form-group">
+            <div class="control-label">
+            <%= f.submit "Submit Response", class:"btn btn-success"%>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
     <br/>
-  <div class="form-group">
-    <div class="col-sm-8">
-    <%= f.submit "Submit", class:"btn btn-primary"%>
+    <div class="row">
+      <div class="col-sm-8">
+        <% if @responses %>
+        <h4>Responses</h4>
+          <% @responses.each do |response| %>
+            <ul id="responses-ul">
+              <li class="response-li-group">
+                <p class="response-p"><%= sanitize(@markdown.render(response.body)) %></p>
+                <%= button_to "Vote for Response", { action: "edit" }, class: "btn btn-primary btn-sm", method: "get" %>
+              </li>
+            </ul>
+          <% end %>
+        <% end %>
+      <% end %>
+      </div>
+      <div class="col-sm-6"></div>
     </div>
-  </div>
-  <% end %>
-  <br/>
-  <% if @responses %>
-    <% @responses.each do |response| %>
-      <ul>
-        <li><%= "#{response.id}. #{response.body}" %></li>
-      </ul>
-    <% end %>
-  <% end %>
-<% end %>
   </div>
 </div>

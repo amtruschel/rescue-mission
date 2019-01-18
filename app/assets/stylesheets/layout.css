@@ -3,13 +3,14 @@
   margin-right: 15px;
 }
 
-ul {
-  list-style-type: none;
-}
-
 .flash.notice {
   background-color: #ffdd99;
   border: 1px solid #ffaa00;
+}
+
+.flash.success {
+  background-color: #B3F6BB;
+  border: 1px solid #1BBA2E;
 }
 
 #nav-logo {
@@ -30,4 +31,19 @@ ul {
     padding-right: 0;
     padding-left: 0;
   }
+}
+
+.del-btn {
+  margin-left: 5px;
+}
+
+.response-li-group {
+  border-top: 1px solid grey;
+  padding: 10px;
+  padding-left: 0;
+}
+
+#responses-ul {
+  list-style-type: none;
+  padding-left: 0;
 }
