@@ -10,7 +10,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params.merge(user_id: 1))
+    @question = Question.new(question_params.merge(user: current_user))
 
     if @question.save
       flash[:success] = "Question saved successfully"
@@ -21,6 +21,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    debugger
     renderer = Redcarpet::Render::HTML.new({ filter_html: true, hard_wrap: true })
     @markdown = Redcarpet::Markdown.new(renderer, extensions = {
       fenced_code_blocks: true,
@@ -40,7 +41,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    @question.update(question_params.merge(user_id: 1))
+    @question.update(question_params.merge(user: current_user))
 
     if @question.save
       flash[:success] = "Question saved successfully"
@@ -68,9 +69,4 @@ private
   def find_question
     @question = Question.find(params[:id])
   end
-
-  def current_user
-    @current_user ||= User.find(id: session[:user_id])
-  end
-
 end

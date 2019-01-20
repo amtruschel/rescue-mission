@@ -10,7 +10,7 @@ class ResponsesController < ApplicationController
   end
 
   def create
-    @response = Response.new(response_params.merge({user_id: 1, question: @question}))
+    @response = Response.new(response_params.merge({user: current_user, question: @question}))
 
     if @response.save
       flash[:success] = 'Response saved successfully'
@@ -50,9 +50,5 @@ private
 
   def find_question
     @question = Question.find(params[:question_id])
-  end
-
-  def current_user
-    @current_user ||= User.find(id: session[:user_id])
   end
 end
