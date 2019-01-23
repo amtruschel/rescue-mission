@@ -3,6 +3,22 @@
   margin-right: 15px;
 }
 
+#yield-container {
+  border-left: solid 1px #e1e9f7;
+}
+
+.h1 {
+  margin-left: 5px;
+}
+
+#ask-question-btn {
+  margin-right: 15px;
+}
+
+.question_link {
+  border-top: solid 1px #e1e9f7;
+}
+
 .flash.notice {
   background-color: #ffdd99;
   border: 1px solid #ffaa00;
@@ -48,6 +64,6 @@
   padding-left: 0;
 }
 
-.response-ranking {
+.response-ranking, .response-user, .question-user {
   color: grey;
 }

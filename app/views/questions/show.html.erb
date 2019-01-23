@@ -4,10 +4,13 @@
   <% if @question %>
     <h3><%= @question.title %></h3>
     <p><%= sanitize(@markdown.render(@question.description)) %></p>
+    <p class="question-user">user: <%= User.where(id: @question.user_id).first.username %></p>
     <div class="row">
       <div class="col-sm-4 d-flex">
-        <%= button_to "Edit Question", { action: "edit" }, class: "btn btn-secondary", method: "get" %>
-        <%= button_to "Delete Question", { action: "destroy" }, class: "btn btn-danger del-btn", method: "delete", data: { confirm: "Are you sure you want to delete this question?" } %>
+        <% if @question.user == current_user %>
+          <%= button_to "Edit Question", { action: "edit" }, class: "btn btn-secondary", method: "get" %>
+          <%= button_to "Delete Question", { action: "destroy" }, class: "btn btn-danger del-btn", method: "delete", data: { confirm: "Are you sure you want to delete this question?" } %>
+        <% end %>
       </div>
       <div class="col-sm-8"></div>
     </div>
@@ -39,12 +42,15 @@
             <ul id="responses-ul">
               <li class="response-li-group">
                 <p class="response-p"><%= sanitize(@markdown.render(response.body)) %></p>
+                <% if response.user == current_user %>
+                  <%= button_to "Edit Response", edit_question_response_path(@question, response), class: "btn btn-secondary", method: "get" %>
+                <% end %>
+                <p class="response-user">user: <%= User.where(id: response.user).first.username %></p>
                 <div class="row justify-content-start">
                   <div class="col-sm-8">
-                    <%= image_tag "up-arrow.jpg", :size => "30x30", :class => "up-arrow ml-3" %>
+                    <%= link_to image_tag("up-arrow.jpg", size: "30x30"), vote_for_answer_question_response_path(@question, response), class: "up-arrow ml-3", method: "post" %>
                     <p class="response-ranking mb-0"><%= "Votes: #{response.ranking || 0}" %></p>
-                    <%= image_tag "down-arrow.jpg", :size => "30x30", :class => "down-arrow ml-3" %>
-                    <%= button_to "Vote for Answer", vote_for_answer_question_response_path(@question, response), class: "btn btn-primary btn-sm", method: "post" %>
+                    <%= link_to image_tag("down-arrow.jpg", size: "30x30"), vote_against_answer_question_response_path(@question, response), class: "down-arrow ml-3", method: "post" %>
                   </div>
                 </div>
               </li>

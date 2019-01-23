@@ -21,7 +21,6 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    debugger
     renderer = Redcarpet::Render::HTML.new({ filter_html: true, hard_wrap: true })
     @markdown = Redcarpet::Markdown.new(renderer, extensions = {
       fenced_code_blocks: true,
@@ -32,7 +31,7 @@ class QuestionsController < ApplicationController
       quote: true,
       highlight: true,
       underline: false,
-      footnotes: true  })
+      footnotes: true })
     @responses = Response.where(question: @question).order("ranking DESC NULLS LAST")
     @response = Response.new
   end

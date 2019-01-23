@@ -1,6 +1,12 @@
+<div class="row d-flex justify-content-between">
+  <div class="col-xs-6">
+    <h1 class="h1">Top Questions</h1>
+  </div>
+  <div class="col-xs-6">
+    <%= button_to "Ask a Question", { action: "new" }, class: "btn btn-success", id: "ask-question-btn", method: "get" %>
+  </div>
+</div>
 <br/>
-<h1>Top Questions</h1>
-
 <% if @recent_questions %>
   <div class="questions_list">
   <% @recent_questions.each do |question| %>
@@ -12,4 +18,3 @@
   </div>
 <% end %>
 <br/>
-<%= button_to "Ask a Question", { action: "new" }, class: "btn btn-success", method: "get" %>
