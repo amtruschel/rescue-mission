@@ -1,5 +1,5 @@
 class ResponsesController < ApplicationController
-  before_action :find_question, only: [:new,:create,:edit,:update,:vote_for_answer,:vote_against_answer]
+  before_action :find_question, only: [:new,:create,:edit,:update,:destroy,:vote_for_answer,:vote_against_answer]
 
   def show
     @response = Response.find(params[:response_id])
@@ -37,7 +37,10 @@ class ResponsesController < ApplicationController
   end
 
   def destroy
-
+    @response = Response.find(params[:id])
+    @response.destroy
+    flash[:success] = "Your response has been deleted."
+    redirect_to @question
   end
 
   def vote_for_answer

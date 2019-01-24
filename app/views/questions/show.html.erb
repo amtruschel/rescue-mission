@@ -43,7 +43,12 @@
               <li class="response-li-group">
                 <p class="response-p"><%= sanitize(@markdown.render(response.body)) %></p>
                 <% if response.user == current_user %>
-                  <%= button_to "Edit Response", edit_question_response_path(@question, response), class: "btn btn-secondary", method: "get" %>
+                  <div class="row">
+                    <div class="col-sm-4 d-flex">
+                    <%= button_to "Edit Response", edit_question_response_path(@question, response), class: "btn btn-secondary", method: "get" %>
+                    <%= button_to "Delete Response", question_response_path(@question, response), class: "btn btn-danger del-btn", method: "delete", data: { confirm: "Are you sure you want to delete this response?" } %>
+                    </div>
+                  </div>
                 <% end %>
                 <p class="response-user">user: <%= User.where(id: response.user).first.username %></p>
                 <div class="row justify-content-start">

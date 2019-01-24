@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit]
 
   resources :questions do
-    resources :responses do
+    resources :responses, except: [:index] do
       post 'vote_for_answer', on: :member
       post 'vote_against_answer', on: :member
     end
