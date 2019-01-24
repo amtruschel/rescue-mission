@@ -12,17 +12,17 @@
 
   <body>
     <%= render "layouts/navbar" %>
-    <div id="body" class="container-fluid ml-0">
-      <div class="row justify-content-center" align="center">
+    <div id="body" class="container-fluid">
+      <div class="row">
         <div class="col-sm-8">
           <% flash.each do |key, value| %>
             <div class="flash <%= key %>">
-              <%= value %><a href="#" class="close" data-dismiss="alert">×</a>
+              <%= value %><a href="#" class="close" data-dismiss="alert">X</a>
             </div>
           <% end %>
         </div>
       </div>
-      <div class="container py-1 my-3" id="yield-container">
+      <div class="container">
         <%= yield %>
       </div>
     </div>

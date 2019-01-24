@@ -1,4 +1,9 @@
-<br/>
-<h3>Edit Your Question</h3>
-<br/>
-<%= render 'questions/form' %>
+<% if @question.user == current_user %>
+  <br/>
+  <h3>Edit Your Question</h3>
+  <br/>
+  <%= render 'questions/form' %>
+<% else %>
+  <br/>
+  <h3>You don't have access to edit this question</h3>
+<% end %>
