@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :responses, except: [:index] do
       post 'vote_for_answer', on: :member
       post 'vote_against_answer', on: :member
+      post 'vote_for_best_answer', on: :member
     end
   end
 

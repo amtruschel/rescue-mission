@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
       highlight: true,
       underline: false,
       footnotes: true })
-    @responses = Response.where(question: @question).order("ranking DESC NULLS LAST")
+    @responses = Response.where(question: @question).order("best_answer DESC NULLS LAST").order("ranking DESC NULLS LAST")
     @response = Response.new
   end
 

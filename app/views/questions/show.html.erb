@@ -51,12 +51,18 @@
                   </div>
                 <% end %>
                 <p class="response-user">user: <%= User.where(id: response.user).first.username %></p>
-                <div class="row justify-content-start">
-                  <div class="col-sm-8">
+                <div class="row d-flex justify-content-start align-items-center">
+                  <div class="col-sm-2">
                     <%= link_to image_tag("up-arrow.jpg", size: "30x30"), vote_for_answer_question_response_path(@question, response), class: "up-arrow ml-3", method: "post" %>
                     <p class="response-ranking mb-0"><%= "Votes: #{response.ranking || 0}" %></p>
                     <%= link_to image_tag("down-arrow.jpg", size: "30x30"), vote_against_answer_question_response_path(@question, response), class: "down-arrow ml-3", method: "post" %>
                   </div>
+                  <% if @question.user == current_user %>
+                    <div class="col-sm-2">
+                      <%= button_to "Vote As Best", vote_for_best_answer_question_response_path(@question, response), class: "btn btn-light ml-3", id: "best-btn", method: "post" %>
+                    </div>
+                  <% end %>
+                  <div class="col-sm-8"></div>
                 </div>
               </li>
             </ul>

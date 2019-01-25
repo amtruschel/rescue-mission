@@ -58,3 +58,8 @@
 .response-ranking, .response-user, .question-user {
   color: grey;
 }
+
+.best-btn-clicked {
+  background-color: #007bff;
+  color: white;
+}
